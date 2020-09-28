@@ -1,0 +1,16 @@
+﻿@model Contacts.Models.Profile
+
+@{
+    ViewBag.Title = "Профиль";
+}
+
+<h2>Профиль</h2>
+
+@Html.Partial("DetailedProfile", Model)
+
+<h3>Контакты</h3>
+
+@Html.Partial("DetailedContacts", Model.Contacts)
+
+@Html.ActionLink("Изменить", "Edit", new { ID = Model.ID }, htmlAttributes: new { @class = "btn btn-primary" })
+@Html.ActionLink("Удалить", "Delete", new { ID = Model.ID }, htmlAttributes: new { @class = "btn btn-danger" })

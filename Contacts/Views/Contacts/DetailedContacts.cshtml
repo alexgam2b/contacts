@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Contacts.Models.Contact>
+
+<dl class="dl-horizontal list-group">
+    @foreach (Contacts.Models.Contact contact in Model)
+    {
+    <div class="list-group-item">
+        <dt>@Html.DisplayFor(c => contact.Type.Title)</dt>
+        <dd>@Html.DisplayFor(c => contact.Value)</dd>
+    </div>
+    }
+</dl>

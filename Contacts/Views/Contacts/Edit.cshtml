@@ -1,0 +1,73 @@
+﻿@model Contacts.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Изменить";
+}
+
+<h2>Изменить</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="form-horizontal mt-1">
+
+    @Html.Partial("EditableProfile", Model.Profile)
+
+    <div id="contactBlock">
+        @Html.Partial("EditableContact", new Contacts.ViewModels.ContactViewModel { Contacts = Model.Profile.Contacts, ContactTypes = Model.ContactTypes })
+    </div>
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <div class="row mt-1">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <a class="btn btn-primary" id="addContact">Добавить контактную информацию</a>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts
+            {
+    <script>
+        $(document).ready(function () {
+            var i = @Model.Profile.Contacts.Count;
+            $("#addContact").click(function () {
+                var htmlBlock = '<div class="form-group">' +
+                    '<div class="col-md-2">' +
+                    '<input id="Contacts_' + i + '__ID" name="Contacts[' + i + '].ID" type="hidden" value="0">' +
+                    '<input id="Contacts_' + i + '__ProfileID" name="Contacts[' + i + '].ProfileID" type="hidden" value=@Model.Profile.ID>' +
+                    '<select class="form-control" id="Contacts_' + i + '__ContactTypeID" name="Contacts[' + i + '].ContactTypeID">';
+                @foreach (Contacts.Models.ContactType cType in Model.ContactTypes)
+                {
+                    @:htmlBlock += "<option value=\"" + @cType.ID + "\">@cType.Title</option>";
+                }
+                htmlBlock += '</select>' +
+                    '</div>' +
+                    '<div class="col-md-3">' +
+                        '<input class="form-control" id="Contacts_' + i + '__Value" name="Contacts[' + i + '].Value" type="text">' +
+                        '<span class="field-validation-valid" data-valmsg-for="Contacts[' + i + '].Value" data-valmsg-replace="true"></span>' +
+                    '</div>' +
+                    '<div class="col-md-5">' +
+                        '<button class="btn btn-danger" name="indexToDelete" value="' + i + '">Удалить</button>' +
+                    '</div>' +
+                '</div>';
+                $("#contactBlock").append(htmlBlock);
+                i++;
+            });
+        });
+    </script>
+}

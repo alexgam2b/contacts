@@ -1,0 +1,10 @@
+
+*.dll
+.vs/*
+packages/*
+testresults/*
+contacts/bin/*
+contacts/obj/*
+contacts.tests/bin/*
+contacts.tests/obj/*
+

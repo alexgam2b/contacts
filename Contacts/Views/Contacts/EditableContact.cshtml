@@ -1,0 +1,24 @@
+﻿@model Contacts.ViewModels.ContactViewModel
+
+@for (int i = 0; i < Model.Contacts.Count; i++)
+{
+    <div class="form-group">
+        <div class="col-md-2">
+            <input id=@("Contacts_" + i + "__ID") name=@("Contacts[" + i + "].ID") type="hidden" value=@Model.Contacts[i].ID>
+            <input id=@("Contacts_" + i + "__ProfileID") name=@("Contacts[" + i + "].ProfileID") type="hidden" value=@Model.Contacts[i].ProfileID>
+            <select class="form-control" id=@("Contacts_" + i + "__ContactTypeID") name=@("Contacts[" + i + "].ContactTypeID")>
+                @foreach (var cType in Model.ContactTypes)
+                {
+                    <option @if (cType.ID == Model.Contacts[i].ContactTypeID) { <text> selected="selected" </text> } value=@cType.ID>@cType.Title</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" id=@("Contacts_" + i + "__Value") name=@("Contacts[" + i + "].Value") type="text" value=@Model.Contacts[i].Value>
+            <span class="field - validation - valid" data-valmsg-for=@("Contacts[" + i + "].Value") data-valmsg-replace="true"></span>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-danger" name="indexToDelete" value="@i">Удалить</button>
+        </div>
+    </div>
+}

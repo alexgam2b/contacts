@@ -1,0 +1,26 @@
+﻿@model Contacts.Models.Profile
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Удаление</h2>
+
+@Html.Partial("DetailedProfile", Model)
+
+<h3>Контакты</h3>
+
+@Html.Partial("DetailedContacts", Model.Contacts)
+
+<p class="text-danger">@ViewBag.ErrorMessage</p>
+<p>Вы уверены, что хотите навсегда удалить профиль?</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <input class="btn btn-danger" type="submit" value="Удалить" />
+        @Html.ActionLink("Отмена", "Details/" + Model.ID, "Contacts", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+}

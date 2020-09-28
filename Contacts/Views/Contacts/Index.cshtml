@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Contacts.Models.Profile>
+
+@{
+    ViewBag.Title = "Контакты";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-inline" }))
+{
+<div class="form-group mt-1">
+    @Html.Label("Поиск")
+    @Html.TextBox("filter", null, new { @class = "form-control" })
+    <input type="submit" value="Найти" class="btn btn-default" />
+</div>
+}
+<table class="table mt-1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var profile in Model)
+        {
+            <tr id=@profile.ID>
+                <td>
+                    @Html.DisplayFor(model => profile.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => profile.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => profile.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => profile.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => profile.Organization)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => profile.JobTitle)
+                </td>
+                <td>
+                    @Html.ActionLink("Открыть", "Details", new { ID = profile.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Добавить", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
