@@ -8,13 +8,13 @@ namespace Contacts.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Данное поле необходимо заполнить.")]
         [StringLength(25, ErrorMessage = "Доступная длина не более 25 символов.")]
         [Display(Name = "Фамилия")]
         [RegularExpression(@"^(\w|\s)*$", ErrorMessage = "Разрешены только алфавитно-цифровые символы и пробелы.")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Данное поле необходимо заполнить.")]
         [StringLength(25, ErrorMessage = "Доступная длина не более 25 символов.")]
         [Display(Name = "Имя")]
         [RegularExpression(@"^(\w|\s)*$", ErrorMessage = "Разрешены только алфавитно-цифровые символы и пробелы.")]
@@ -25,7 +25,7 @@ namespace Contacts.Models
         [RegularExpression(@"^(\w|\s)*$", ErrorMessage = "Разрешены только алфавитно-цифровые символы и пробелы.")]
         public string MiddleName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Данное поле необходимо заполнить.")]
         [DataType(DataType.Date)]
         // [Range(1900,2021, ErrorMessage = "Недопустимый год")]
         [Display(Name = "Дата рождения")]

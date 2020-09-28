@@ -15,7 +15,7 @@ namespace Contacts.Models
         [Required]
         public int ContactTypeID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Данное поле необходимо заполнить.")]
         [StringLength(50, ErrorMessage = "Доступная длина не более 50 символов.")]
         [RegularExpression(@"^(\w|\s|[""'.@])*$", ErrorMessage = "Разрешены только алфавитно-цифровые и некоторые специальные символы.")]
         public string Value { get; set; }
